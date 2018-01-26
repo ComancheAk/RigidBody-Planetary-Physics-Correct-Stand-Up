@@ -11,7 +11,7 @@ func _integrate_forces(state):
 	target = state.transform
 	print(state.get_total_gravity()) #Information for testing
 	state.transform = orthonormalizePlanetary(target,gravityCentre)
-	state.set_linear_velocity(target.basis.x+state.get_total_gravity())
+	state.set_linear_velocity((target.basis.x+target.basis.z)+state.get_total_gravity())
 	pass
 
 func orthonormalizePlanetary(t,p):
