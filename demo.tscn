@@ -10,7 +10,7 @@ radius = 1.0
 
 extents = Vector3( 1, 1, 1 )
 
-[sub_resource type="CapsuleMesh" id=6]
+[sub_resource type="CapsuleMesh" id=3]
 
 radius = 1.0
 mid_height = 1.0
@@ -111,7 +111,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 6 )
+mesh = SubResource( 3 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
