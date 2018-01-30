@@ -5,6 +5,6 @@ Requires Godot Engine 3.0 RC3 or higher version.
 
 Use Arrow keys or WASD to move the capsule.
 
-![Sceenshot](gif3.gif)
+![Sceenshot](assets/rigidbody_planetary_standup/gif3.gif)
 
 Feel free to contact me if you got questions about this demo.
