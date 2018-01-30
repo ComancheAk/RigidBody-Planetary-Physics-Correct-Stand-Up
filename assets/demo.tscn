@@ -63,7 +63,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="RigidBody" type="RigidBody" parent="." index="1"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2847, 1.07375, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57689, 0 )
 input_ray_pickable = true
 input_capture_on_drag = false
 collision_layer = 1
@@ -118,7 +118,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Camera" type="Camera" parent="RigidBody" index="1"]
 
-transform = Transform( -0.999169, -0.0188215, -0.036143, -0.0305394, 0.933087, 0.358351, 0.0269799, 0.359157, -0.932887, -0.0160996, 0.986573, -1.48574 )
+transform = Transform( -1, 4.37114e-08, -7.57103e-08, 0, 0.866025, 0.5, 8.74227e-08, 0.5, -0.866025, 0, 1, -2 )
 keep_aspect = 1
 cull_mask = 1048575
 environment = null
@@ -131,6 +131,7 @@ fov = 70.0
 size = 1.0
 near = 0.05
 far = 100.0
+_sections_unfolded = [ "Transform" ]
 
 [node name="StaticBody" type="StaticBody" parent="." index="2"]
 
