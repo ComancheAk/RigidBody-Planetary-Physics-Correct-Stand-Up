@@ -3,8 +3,9 @@ var target #Variable for current object Transform
 var gravityCentre #Variable for gravity centre
 var xVelocity
 var zVelocity
-var MOUSESPEED = 0.00005
+var MOUSESPEED = 0.0025
 var rotAngle = 0
+var tempRot = 0
 
 
 func _ready():
@@ -16,13 +17,19 @@ func _ready():
 func _input(event):
 	# For Mouse Look. The Camera node has a script for the X rotation.
 	if event is InputEventMouseMotion:
-		rotAngle += event.relative.x*MOUSESPEED
+		rotAngle = event.relative.x*MOUSESPEED
 
 func _integrate_forces(state):
 	target = state.transform
-	print(rotAngle)
+	#print(rotAngle)
 	#print(state.get_total_gravity()) #Information for testing
-	state.transform = orthonormalizePlanetary(target,gravityCentre, rotAngle)
+	print("phi is " ,rotAngle)
+	print("tempPhi is " ,tempRot)
+	if (tempRot == rotAngle):
+		rotAngle = 0 
+	state.transform = orthonormalizePlanetary(target,gravityCentre, -rotAngle)
+	if (rotAngle != 0):
+		tempRot = rotAngle
 	if (Input.is_action_pressed("ui_up")):
 		zVelocity += 0.1
 	if (Input.is_action_just_released("ui_up")):
@@ -61,4 +68,5 @@ func orthonormalizePlanetary(t,p,phi):
 	crossGZ = g.cross(z).normalized()
 	newZ = crossGZ.cross(g).normalized()
 	tempTransform = Transform(crossGZ,g,newZ,t.origin)
+	tempTransform = Transform(tempTransform.basis.rotated(g,phi),t.origin)
 	return tempTransform

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://RigidBody.gd" type="Script" id=1]
 
@@ -17,11 +17,28 @@ mid_height = 1.0
 radial_segments = 64
 rings = 8
 
-[sub_resource type="SphereShape" id=4]
+[sub_resource type="CubeMesh" id=4]
+
+size = Vector3( 2, 2, 2 )
+subdivide_width = 0
+subdivide_height = 0
+subdivide_depth = 0
+
+[sub_resource type="GDScript" id=5]
+
+script/source = "extends Camera
+
+var MOUSESPEED = 0.005
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		rotation.x = clamp(rotation.x - event.relative.y*MOUSESPEED, deg2rad(-90), deg2rad(90))"
+
+[sub_resource type="SphereShape" id=6]
 
 radius = 1.0
 
-[sub_resource type="SphereMesh" id=5]
+[sub_resource type="SphereMesh" id=7]
 
 radius = 1.0
 height = 2.0
@@ -116,6 +133,22 @@ skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
 
+[node name="Head" type="MeshInstance" parent="RigidBody/CollisionShape" index="1"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70889, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 4 )
+skeleton = NodePath("..")
+material/0 = null
+
 [node name="Camera" type="Camera" parent="RigidBody" index="1"]
 
 transform = Transform( -1, 4.37114e-08, -7.57103e-08, 0, 0.866025, 0.5, 8.74227e-08, 0.5, -0.866025, 0, 1, -2 )
@@ -131,6 +164,7 @@ fov = 70.0
 size = 1.0
 near = 0.05
 far = 100.0
+script = SubResource( 5 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="StaticBody" type="StaticBody" parent="." index="2"]
@@ -146,7 +180,7 @@ constant_angular_velocity = Vector3( 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
 
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 disabled = false
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody/CollisionShape" index="0"]
@@ -160,7 +194,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 5 )
+mesh = SubResource( 7 )
 skeleton = NodePath("..")
 material/0 = null
 
